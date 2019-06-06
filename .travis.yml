@@ -19,7 +19,7 @@ before_install:
   - echo "Adding ssh keys"
   - trap "echo 'Shutting down SSH agent'; eval '$(ssh-agent -k)';" EXIT INT TERM HUP
   - eval "$(ssh-agent -s)"
-  - echo "$SOLACE_PKS_KEY" | base64 -d | ssh-add -
+  - echo "$SOLACE_PKS_KEY" | openssl base64 -d | ssh-add -
 
 install: true
 
