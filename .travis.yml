@@ -17,6 +17,7 @@ before_install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl; chmod +x ./kubectl; sudo mv ./kubectl /usr/bin/
   - sudo apt-get install jq
   - echo "Adding ssh keys"
+  - trap "echo 'Cleanup SSH agent and keys'; eval '$(ssh-agent -k)'; rm -rf $(pwd)/.travis" EXIT INT TERM HUP
   - mkdir .travis
   - echo $SOLACE_PKS_KEY | base64 -d > .travis/solace_pks_key
   - chmod 600 .travis/solace_pks_key
